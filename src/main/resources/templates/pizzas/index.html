@@ -1,15 +1,36 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{fragments :: resources}">
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <title>Pizzas</title>
+    <title>Pizzas</title>
 </head>
 <body>
+<div th:replace="~{fragments:: navbar('pizzas')}"></div>
+<div class="container py-3">
+    <h2 class="mb-3">Pizzas</h2>
+    <p th:if="${list.size() == 0}">There are no pizzas.</p>
+    <table th:unless="${list.size() == 0}" class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pizza : ${list}" th:object="${pizza}">
+            <th th:text="*{name}" scope="row"></th>
+            <td th:text="|*{price} €|"></td>
+            <td th:text="*{description}"></td>
+        </tr>
 
+        </tbody>
+    </table>
+</div>
 <th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
 </html>
