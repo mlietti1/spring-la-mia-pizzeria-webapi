@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments :: resources}">
+<head>
+    <th:block th:replace="~{fragments :: resources}"></th:block>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -19,6 +20,7 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -26,11 +28,11 @@
             <th th:text="*{name}" scope="row"></th>
             <td th:text="|*{price} €|"></td>
             <td th:text="*{description}"></td>
+            <td><i class="fa-solid fa-eye"></i></td>
         </tr>
 
         </tbody>
     </table>
 </div>
-<th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
 </html>

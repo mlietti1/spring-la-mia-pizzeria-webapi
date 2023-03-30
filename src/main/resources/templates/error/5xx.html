@@ -7,12 +7,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Home</title>
+    <title>Error [[${status}]]</title>
 </head>
-<body>
-<div th:replace="~{fragments:: navbar('home')}"></div>
+<body class="bg-danger text-light">
+<div th:replace="~{fragments:: navbar('pizzas')}"></div>
 <div class="container py-3">
-    <h2>Home</h2>
+    <h1><i class="fa-solid fa-gear"></i> Oops Server Error</h1>
+</div>
+<div th:if="${exception}">
+    <p th:text="${exception}"></p>
+    <p th:text="${trace}"></p>
 </div>
 </body>
 </html>

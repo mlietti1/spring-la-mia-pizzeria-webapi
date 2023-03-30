@@ -7,12 +7,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Home</title>
+    <title>Error [[${status}]]</title>
 </head>
-<body>
-<div th:replace="~{fragments:: navbar('home')}"></div>
+<body class="bg-warning text-light">
+<div th:replace="~{fragments:: navbar('pizzas')}"></div>
 <div class="container py-3">
-    <h2>Home</h2>
+    <h1 class="text-center mt-5"><i class="fa-solid fa-triangle-exclamation"></i> Oops Client Error</h1>
+    <p class="text-center mt-3">
+        <a class="btn btn-light" th:href="@{/}">Go back to home</a>
+    </p>
 </div>
 </body>
 </html>
