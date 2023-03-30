@@ -1,3 +1,21 @@
+body {
+    color: green;
+}
+
 .logo{
     height: 32px;
+}
+
+.heading {
+    border-bottom: 2px solid #a7d197;
+}
+
+thead th {
+    font-weight: 400;
+    color: #7fa86f;
+}
+
+tbody th {
+    font-weight: 400;
+    color: #f76f6f;
 }

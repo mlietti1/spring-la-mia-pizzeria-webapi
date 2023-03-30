@@ -3,32 +3,37 @@
 <head>
     <th:block th:replace="~{fragments :: resources}"></th:block>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
 
     <title>Pizzas</title>
 </head>
 <body>
-<div th:replace="~{fragments:: navbar('pizzas')}"></div>
+<div th:replace="~{fragments:: navbar('pizzas', ${keyword}, true)}"></div>
 <div class="container py-3">
-    <h2 class="mb-3">Pizzas</h2>
-    <p th:if="${list.size() == 0}">There are no pizzas.</p>
-    <table th:unless="${list.size() == 0}" class="table">
+    <h2 class="mb-3 pb-3 heading">Our Pizzas <i
+            class="fa-solid fs-4 fa-pizza-slice"></i></h2>
+    <div class="alert alert-danger" role="alert" th:if="${list.size() == 0}">
+        There are no pizzas to show!
+    </div>
+    <table class="table table-borderless" th:unless="${list.size() == 0}">
         <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Description</th>
-            <th scope="col">Actions</th>
+            <th class="fst-italic" scope="col">Name</th>
+            <th class="fst-italic" scope="col">Price</th>
+            <th class="fst-italic" scope="col">Description</th>
+            <th class="fst-italic" scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="pizza : ${list}" th:object="${pizza}">
-            <th th:text="*{name}" scope="row"></th>
+            <th scope="row" th:text="*{name}"></th>
             <td th:text="|*{price} €|"></td>
             <td th:text="*{description}"></td>
-            <td><i class="fa-solid fa-eye"></i></td>
+            <td><a class="text-danger" th:href="@{|/pizzas/*{id}|}" title="detail"><i
+                    class="fa-solid fa-pizza-slice"></i></a>
+            </td>
         </tr>
 
         </tbody>

@@ -12,11 +12,13 @@
 <body class="bg-danger text-light">
 <div th:replace="~{fragments:: navbar('pizzas')}"></div>
 <div class="container py-3">
-    <h1><i class="fa-solid fa-gear"></i> Oops Server Error</h1>
+    <h1 class="text-center mt-5"><i class="fa-solid fa-gear"></i> Oops Server Error</h1>
 </div>
+<!--
 <div th:if="${exception}">
     <p th:text="${exception}"></p>
     <p th:text="${trace}"></p>
 </div>
+-->
 </body>
 </html>

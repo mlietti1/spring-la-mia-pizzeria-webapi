@@ -3,16 +3,20 @@
 <head>
     <th:block th:replace="~{fragments :: resources}"></th:block>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
 
     <title>Home</title>
 </head>
 <body>
-<div th:replace="~{fragments:: navbar('home')}"></div>
+<div th:replace="~{fragments:: navbar('home', ${keyboard}, true)}"></div>
 <div class="container py-3">
-    <h2>Home</h2>
+    <h2 class="mb-3 pb-3 heading">Home</h2>
+
+    <div>
+        <h5>Welcome! <i class=" fa-solid fa-leaf"></i></h5>
+    </div>
 </div>
 </body>
 </html>
