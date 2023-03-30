@@ -12,8 +12,7 @@
 <body>
 <div th:replace="~{fragments:: navbar('pizzas', ${keyword}, true)}"></div>
 <div class="container py-3">
-    <h2 class="mb-3 pb-3 heading">Our Pizzas <i
-            class="fa-solid fs-4 fa-pizza-slice"></i></h2>
+    <h2 class="mb-3 pb-3 heading">Our Pizzas &#127829;</h2>
     <div class="alert alert-danger" role="alert" th:if="${list.size() == 0}">
         There are no pizzas to show!
     </div>
