@@ -1,5 +1,6 @@
 body {
     color: green;
+    font-family: 'Raleway', sans-serif;
 }
 
 .logo{
@@ -11,7 +12,7 @@ body {
 }
 
 thead th {
-    font-weight: 400;
+    font-weight: 200;
     color: #7fa86f;
 }
 
