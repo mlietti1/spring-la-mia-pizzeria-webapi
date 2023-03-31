@@ -42,7 +42,13 @@
                             th:href="@{/pizzas}"
                     >Pizzas</a>
                 </li>
-
+                <li class="nav-item">
+                    <a
+                            class="nav-link nav-text-color"
+                            th:classAppend="${current == 'create'} ? active : not-active"
+                            th:href="@{/pizzas/create}"
+                    >Add a new pizza</a>
+                </li>
             </ul>
             <form class="d-flex"
                   method="get"
