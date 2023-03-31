@@ -3,22 +3,21 @@
 <head>
     <th:block th:replace="~{fragments :: resources}"></th:block>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
 
     <title>Error [[${status}]]</title>
 </head>
 <body class="bg-danger text-light">
-<div th:replace="~{fragments:: navbar('pizzas')}"></div>
+<div th:replace="~{fragments:: navbar('error', '', false)}"></div>
 <div class="container py-3">
     <h1 class="text-center mt-5"><i class="fa-solid fa-gear"></i> Oops Server Error</h1>
 </div>
-<!--
-<div th:if="${exception}">
+
+<div class="container py-3" th:if="${exception}">
     <p th:text="${exception}"></p>
     <p th:text="${trace}"></p>
 </div>
--->
 </body>
 </html>

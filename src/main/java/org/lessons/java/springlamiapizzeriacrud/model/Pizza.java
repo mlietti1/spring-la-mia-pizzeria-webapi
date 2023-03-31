@@ -1,6 +1,10 @@
 package org.lessons.java.springlamiapizzeriacrud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,13 +16,28 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Size(min = 3, max = 25)
     @Column(nullable = false)
     private String name;
-    @Lob
+    @NotEmpty
     private String description;
+    @NotNull
+    @Positive
     private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public Pizza() {
+        super();
+    }
+
+    public Pizza(String name, String description, BigDecimal price, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public Integer getId() {
         return id;
