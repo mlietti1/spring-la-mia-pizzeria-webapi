@@ -19,8 +19,10 @@
     <div class="alert alert-danger" role="alert" th:if="${list.size() == 0}">
         There are no pizzas to show!
     </div>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${message}">
-        <strong th:text="${message}"></strong>
+    <div class="alert alert-dismissible fade show"
+         th:classAppend="${#strings.equals(message.type, 'SUCCESS')} ? alert-success : alert-danger" role="alert"
+         th:if="${message}">
+        <strong th:text="${message.text}"></strong>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
     </div>
     <table class="table table-borderless" th:unless="${list.size() == 0}">
@@ -41,7 +43,7 @@
                     class="fa-solid fa-pizza-slice"></i></a>
                 <a class="text-warning ms-2" th:href="@{|/pizzas/edit/*{id}|}" title="edit"><i
                         class="fa-solid fa-pen-to-square"></i></a>
-                <a class=" ms-2" th:href="@{|/pizzas/delete/*{id}|}" title="delete"><i
+                <a class="text-secondary ms-2" th:href="@{|/pizzas/delete/*{id}|}" title="delete"><i
                         class="fa-solid fa-trash-can"></i></a>
             </td>
         </tr>
