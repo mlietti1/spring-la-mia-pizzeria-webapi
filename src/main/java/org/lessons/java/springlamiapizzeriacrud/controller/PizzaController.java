@@ -2,6 +2,8 @@ package org.lessons.java.springlamiapizzeriacrud.controller;
 
 import jakarta.validation.Valid;
 import org.lessons.java.springlamiapizzeriacrud.exceptions.PizzaNotFoundException;
+import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage;
+import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage.AlertMessageType;
 import org.lessons.java.springlamiapizzeriacrud.model.Pizza;
 import org.lessons.java.springlamiapizzeriacrud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -69,6 +72,50 @@ public class PizzaController {
         pizzaService.createPizza(formPizza);
         return "redirect:/pizzas";
     }
+
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        try {
+            Pizza pizza = pizzaService.getById(id);
+            model.addAttribute("pizza", pizza);
+            return "pizzas/edit";
+        } catch (PizzaNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza with id " + id + " not found.");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String doEdit(@PathVariable Integer id, @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "pizzas/edit";
+        }
+        try {
+            Pizza updatedPizza = pizzaService.updatePizza(formPizza, id);
+            return "redirect:/pizzas/" + Integer.toString(updatedPizza.getId());
+        } catch (PizzaNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza with id " + id + " not found.");
+        }
+
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            boolean success = pizzaService.deleteById(id);
+            if (success) {
+                redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.SUCCESS, "Pizza with id " + id + " deleted."));
+
+            } else {
+                // throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to delete pizza with id " + id + ".");
+                redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.ERROR, "Unable to delete pizza with id " + id + "."));
+            }
+        } catch (PizzaNotFoundException e) {
+            //throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            redirectAttributes.addAttribute("message", new AlertMessage(AlertMessageType.ERROR, "Pizza with id " + id + " not found."));
+        }
+        return "redirect:/pizzas";
+    }
+
 
     /*
     @GetMapping("/search")
