@@ -22,7 +22,7 @@
     <div class="alert alert-dismissible fade show"
          th:classAppend="${#strings.equals(message.type, 'SUCCESS')} ? alert-success : alert-danger" role="alert"
          th:if="${message}">
-        <strong th:text="${message.text}"></strong>
+        <span th:text="${message.text}"></span>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
     </div>
     <table class="table table-borderless" th:unless="${list.size() == 0}">
