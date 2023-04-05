@@ -5,3 +5,9 @@ INSERT INTO db_pizzeria.pizzas (created_at, description, name, price, updated_at
 INSERT INTO db_pizzeria.pizzas (created_at, description, name, price, updated_at) VALUES ('2023-03-30 13:33:50', 'Mozzarella, pomodoro, olive, cotto, carciofi, funghi', '4 Stagioni', 7.50, '2023-03-30 13:46:50');
 INSERT INTO db_pizzeria.pizzas (created_at, description, name, price, updated_at) VALUES ('2023-03-30 11:33:50', 'Mozzarella, pomodoro, acciughe', 'Napoli', 6.00, '2023-03-30 11:46:50');
 INSERT INTO db_pizzeria.pizzas (created_at, description, name, price, updated_at) VALUES ('2023-03-30 11:33:50', 'Mozzarella, grana, fontina, gorgonzola', '4 formaggi', 7.00, '2023-03-30 11:46:50');
+INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-11', '2023-03-11', 'Classic', 1);
+INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-18', '2023-03-18', 'Base', 1);
+INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-28', '2023-03-28', 'Simple', 2);
+INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-02-20', '2023-03-20', 'Rossa', 2);
+INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-18', '2023-03-18', 'Ricca', 3);
+INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-18', '2023-03-18', 'Bianca', 7);

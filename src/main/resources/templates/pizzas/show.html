@@ -17,6 +17,24 @@
     <th:block th:unless="${#strings.isEmpty(pizza.description)}">
         <p th:text="*{description}"></p>
     </th:block>
+    <table th:if="*{offers.size} > 0" class="table table-borderless">
+        <thead>
+        <tr>
+            <th class="fst-italic" scope="col">Offer name</th>
+            <th class="fst-italic" scope="col">Start date</th>
+            <th class="fst-italic" scope="col">End date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="offer : *{offers}" th:object="${offer}">
+            <th scope="row" th:text="*{title}"></th>
+            <td th:text="${#temporals.format(offer.startDate, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(offer.endDate, 'dd/MM/yyyy')}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+    <a class="btn btn-success">Add offer</a>
     <a class="btn btn-danger" th:href="@{/pizzas}">Back to list</a>
 </div>
 </body>
