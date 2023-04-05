@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="edit = ${pizza.id != null}">
 <head>
     <th:block th:replace="~{fragments :: resources}"></th:block>
     <meta charset="UTF-8">
@@ -7,14 +7,15 @@
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
 
-    <title>Edit Pizza</title>
+    <title th:text="${edit ? 'Edit Pizza' : 'Create Pizza'}"></title>
 </head>
 <body>
 <div th:replace="~{fragments:: navbar('create', '', false)}"></div>
 <div class="container py-3">
-    <h2 class="mb-3 pb-3 heading">Edit Pizza</h2>
+    <h2 class="mb-3 pb-3 heading" th:text="${edit ? 'Edit Pizza' : 'Create Pizza'}"></h2>
 
-    <form id="pizza-form" method="post" th:action="@{|/pizzas/edit/*{id}|}" th:object="${pizza}">
+    <form id="pizza-form" method="post" th:action="@{${formAction}}"
+          th:with="formAction = ${edit ? '/pizzas/edit/' + pizza.id : '/pizzas/create'}" th:object="${pizza}">
         <ul class="list-group py-3">
             <li class="list-group-item list-group-item-danger" th:each="err : ${#fields.globalErrors() }"
                 th:text="${err}"></li>

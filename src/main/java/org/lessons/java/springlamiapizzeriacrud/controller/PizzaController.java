@@ -61,13 +61,13 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
-        return "pizzas/create";
+        return "pizzas/edit";
     }
 
     @PostMapping("/create")
     public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "pizzas/create";
+            return "pizzas/edit";
         }
         pizzaService.createPizza(formPizza);
         return "redirect:/pizzas";
