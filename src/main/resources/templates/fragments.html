@@ -69,5 +69,18 @@
 
 <!-- end fragment for navbar -->
 
+<!-- fragment for alert -->
+
+<th:block th:fragment="alert(alertType, alertText)">
+    <div class="alert alert-dismissible fade show"
+         th:classAppend="|${#strings.equals(alertType, 'SUCCESS') ? 'alert-success' : ''}${#strings.equals(alertType, 'ERROR') ? 'alert-danger' : ''}${#strings.equals(alertType, 'INFO') ? 'alert-info' : ''}${#strings.equals(alertType, 'WARNING') ? 'alert-warning' : ''}|"
+         role="alert">
+        <span th:text="${alertText}"></span>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+    </div>
+</th:block>
+
+<!-- end fragment for alert -->
+
 </body>
 </html>
