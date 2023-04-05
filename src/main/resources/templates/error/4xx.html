@@ -13,7 +13,12 @@
 
 <div th:replace="~{fragments:: navbar('error', '', false)}"></div>
 <div class="container py-3">
-    <h1 class="text-center mt-5"><i class="fa-solid fa-triangle-exclamation"></i> Oops Client Error</h1>
+    <h1 class="text-center mb-3 mt-5"><i class="fa-solid fa-triangle-exclamation"></i> Oops Client Error</h1>
+    <div class="mb-3" th:if="${exception}">
+        <!-- only in dev mode -->
+        <p th:text="${exception}"></p>
+        <p th:text="${trace}"></p>
+    </div>
     <p class="text-center mt-3">
         <a class="btn btn-light" th:href="@{/}">Go back to home</a>
     </p>
