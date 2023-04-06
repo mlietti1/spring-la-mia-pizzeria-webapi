@@ -2,6 +2,7 @@ package org.lessons.java.springlamiapizzeriacrud.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class Offer {
     private Integer id;
 
     @NotNull
+    @Size(min = 3, max = 25)
     private String title;
     private LocalDate startDate;
     private LocalDate endDate;

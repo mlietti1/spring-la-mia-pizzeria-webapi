@@ -34,7 +34,7 @@
 
         </tbody>
     </table>
-    <a class="btn btn-success">Add offer</a>
+    <a class="btn btn-success" th:href="@{/pizzas/offers/create(pizzaId=${pizza.id})}">Add offer</a>
     <a class="btn btn-danger" th:href="@{/pizzas}">Back to list</a>
 </div>
 </body>

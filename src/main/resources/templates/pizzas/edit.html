@@ -32,7 +32,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="price">Price</label>
-            <input class="form-control" id="price" step="0.01" th:errorClass="is-invalid" th:field="*{price}"
+            <input class="form-control" id="price" step="0.01" th:errorClass="is-invalid"
+                   th:field="*{price}"
                    type="number">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
                 <ul class="list-group">
