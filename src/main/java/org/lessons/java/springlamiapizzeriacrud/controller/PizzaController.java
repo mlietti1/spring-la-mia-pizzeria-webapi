@@ -5,6 +5,7 @@ import org.lessons.java.springlamiapizzeriacrud.exceptions.PizzaNotFoundExceptio
 import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage;
 import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage.AlertMessageType;
 import org.lessons.java.springlamiapizzeriacrud.model.Pizza;
+import org.lessons.java.springlamiapizzeriacrud.service.IngredientService;
 import org.lessons.java.springlamiapizzeriacrud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ import java.util.Optional;
 public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
+
+    @Autowired
+    private IngredientService ingredientService;
 
     @GetMapping
     public String index(Model model, @RequestParam(name = "q") Optional<String> keyword) {
@@ -61,12 +65,14 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("ingredientList", ingredientService.getAll());
         return "pizzas/edit";
     }
 
     @PostMapping("/create")
     public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/edit";
         }
         pizzaService.createPizza(formPizza);
@@ -78,6 +84,7 @@ public class PizzaController {
         try {
             Pizza pizza = pizzaService.getById(id);
             model.addAttribute("pizza", pizza);
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/edit";
         } catch (PizzaNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza with id " + id + " not found.");
@@ -85,8 +92,9 @@ public class PizzaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/edit";
         }
         try {

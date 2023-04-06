@@ -17,7 +17,10 @@ public class Offer {
     @NotNull
     @Size(min = 3, max = 25)
     private String title;
+
+    @NotNull
     private LocalDate startDate;
+    @NotNull
     private LocalDate endDate;
 
     @ManyToOne

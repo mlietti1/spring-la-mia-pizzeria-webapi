@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pizzas")
@@ -30,6 +31,10 @@ public class Pizza {
 
     @OneToMany(mappedBy = "pizza")
     private List<Offer> offers;
+
+    @ManyToMany
+    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> ingredients;
 
     public Pizza() {
         super();
@@ -97,5 +102,13 @@ public class Pizza {
 
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
