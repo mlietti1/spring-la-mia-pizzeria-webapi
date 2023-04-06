@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments :: resources}"></th:block>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+
+    <title>Ingredients</title>
+</head>
+<body>
+<div th:replace="~{fragments:: navbar('ingredients', '', false)}"></div>
+<div class="container py-3">
+    <h2 class="mb-3 pb-3 heading">Our ingredients</h2>
+    <ul>
+        <li th:each="ingredient : ${list}" th:text="${ingredient.name}"></li>
+    </ul>
+
+</div>
+</body>
+</html>

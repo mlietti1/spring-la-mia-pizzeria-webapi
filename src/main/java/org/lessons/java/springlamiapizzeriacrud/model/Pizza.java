@@ -33,7 +33,10 @@ public class Pizza {
     private List<Offer> offers;
 
     @ManyToMany
-    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @JoinTable(
+            name = "pizza_ingredient",
+            joinColumns = @JoinColumn(name = "pizza_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private Set<Ingredient> ingredients;
 
     public Pizza() {

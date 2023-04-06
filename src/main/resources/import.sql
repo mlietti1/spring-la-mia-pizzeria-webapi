@@ -11,3 +11,17 @@ INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('
 INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-02-20', '2023-03-20', 'Rossa', 2);
 INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-18', '2023-03-18', 'Ricca', 3);
 INSERT INTO db_pizzeria.offers (end_date, start_date, title, pizza_id) VALUES ('2023-04-18', '2023-03-18', 'Bianca', 7);
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('pomodoro');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('mozzarella');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('basilico');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('salame piccante');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('aglio');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('acciughe');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('prosciutto crudo');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('gorgonzola');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('grana');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('fontina');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('carciofini');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('olive');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('funghi');
+INSERT INTO db_pizzeria.ingredients (name) VALUES ('prosciutto cotto');
