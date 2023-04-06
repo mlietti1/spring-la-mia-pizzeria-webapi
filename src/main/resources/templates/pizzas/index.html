@@ -21,7 +21,7 @@
     <th:block th:if="${message}">
         <div th:replace="~{fragments:: alert(${message.type}, ${message.text})}"></div>
     </th:block>
-    
+
     <table class="table table-borderless" th:unless="${list.size() == 0}">
         <thead>
         <tr>
@@ -33,7 +33,11 @@
         </thead>
         <tbody>
         <tr th:each="pizza : ${list}" th:object="${pizza}">
-            <th scope="row" th:text="*{name}"></th>
+            <th scope="row">
+                <span th:text="*{name}" th:classAppend="*{offers.size > 0 ? 'text-success' : ''}"></span>
+                <i class="fa-solid fa-bolt text-warning" th:if="*{offers.size > 0}"
+                ></i>
+            </th>
             <td th:text="|*{price} €|"></td>
             <td th:text="*{description}"></td>
             <td><a class="text-danger" th:href="@{|/pizzas/*{id}|}" title="detail"><i

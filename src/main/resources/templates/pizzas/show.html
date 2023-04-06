@@ -17,6 +17,9 @@
     <th:block th:unless="${#strings.isEmpty(pizza.description)}">
         <p th:text="*{description}"></p>
     </th:block>
+    <th:block th:if="${message}">
+        <div th:replace="~{fragments:: alert(${message.type}, ${message.text})}"></div>
+    </th:block>
     <table th:if="*{offers.size} > 0" class="table table-borderless">
         <thead>
         <tr>
@@ -34,7 +37,8 @@
             <td>
                 <a class="text-warning ms-2" th:href="@{|/pizzas/offers/edit/*{id}|}" title="edit"><i
                         class="fa-solid fa-pen-to-square"></i></a>
-                <a class="text-secondary ms-2" title="delete"><i
+                <a class="text-secondary ms-2" th:href="@{|/pizzas/offers/delete/*{id}?pizzaId=${pizza.id}|}"
+                   title="delete"><i
                         class="fa-solid fa-trash-can"></i></a>
             </td>
         </tr>

@@ -32,4 +32,9 @@ public class OfferService {
             throw new OfferNotFoundException(Integer.toString(id));
         }
     }
+
+    public void delete(Integer offerId) throws OfferNotFoundException {
+        Offer offerToDelete = getById(offerId);
+        offerRepository.delete(offerToDelete);
+    }
 }

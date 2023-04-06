@@ -3,6 +3,8 @@ package org.lessons.java.springlamiapizzeriacrud.controller;
 import jakarta.validation.Valid;
 import org.lessons.java.springlamiapizzeriacrud.exceptions.OfferNotFoundException;
 import org.lessons.java.springlamiapizzeriacrud.exceptions.PizzaNotFoundException;
+import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage;
+import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage.AlertMessageType;
 import org.lessons.java.springlamiapizzeriacrud.model.Offer;
 import org.lessons.java.springlamiapizzeriacrud.model.Pizza;
 import org.lessons.java.springlamiapizzeriacrud.service.OfferService;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -46,11 +49,12 @@ public class OfferController {
     }
 
     @PostMapping("/create")
-    public String doCreate(@Valid @ModelAttribute Offer formOffer, BindingResult bindingResult) {
+    public String doCreate(@Valid @ModelAttribute Offer formOffer, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "/offers/edit";
         }
         Offer createdOffer = offerService.create(formOffer);
+        redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.SUCCESS, "Offer created successfully."));
         return "redirect:/pizzas/" + Integer.toString(createdOffer.getPizza().getId());
     }
 
@@ -67,11 +71,34 @@ public class OfferController {
     }
 
     @PostMapping("edit/{id}")
-    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("offer") Offer formOffer, BindingResult bindingResult) {
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("offer") Offer formOffer, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "offers/edit";
         }
-        Offer updatedOffer = offerService.update(formOffer);
-        return "redirect:/pizzas/" + Integer.toString(updatedOffer.getPizza().getId());
+        try {
+            Offer updatedOffer = offerService.update(formOffer);
+            redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.SUCCESS, "Offer edited successfully."));
+            return "redirect:/pizzas/" + Integer.toString(updatedOffer.getPizza().getId());
+        } catch (OfferNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping("delete/{id}")
+    public String delete(@PathVariable Integer id, @RequestParam("pizzaId") Optional<Integer> pizzaIdParam, RedirectAttributes redirectAttributes) {
+        Integer pizzaId = pizzaIdParam.get();
+        try {
+            offerService.delete(id);
+            redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.SUCCESS, "Offer deleted successfully."));
+        } catch (OfferNotFoundException e) {
+            redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.ERROR, "Offer with id " + e.getMessage() + " not found."));
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.ERROR, "Unable to delete the offer."));
+        }
+        if (pizzaId == null) {
+            return "redirect:/pizzas";
+        }
+        return "redirect:/pizzas/" + Integer.toString(pizzaId);
     }
 }
