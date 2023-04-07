@@ -5,10 +5,13 @@ import org.lessons.java.springlamiapizzeriacrud.exceptions.PizzaNotFoundExceptio
 import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage;
 import org.lessons.java.springlamiapizzeriacrud.model.AlertMessage.AlertMessageType;
 import org.lessons.java.springlamiapizzeriacrud.model.Pizza;
+import org.lessons.java.springlamiapizzeriacrud.model.User;
+import org.lessons.java.springlamiapizzeriacrud.repository.UserRepository;
 import org.lessons.java.springlamiapizzeriacrud.service.IngredientService;
 import org.lessons.java.springlamiapizzeriacrud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,9 @@ public class PizzaController {
     @Autowired
     private IngredientService ingredientService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public String index(Model model, @RequestParam(name = "q") Optional<String> keyword) {
         List<Pizza> pizzas;
@@ -42,7 +48,9 @@ public class PizzaController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable Integer id, Model model) {
+    public String show(@PathVariable Integer id, Model model, Authentication authentication) {
+        User loggedUser = userRepository.findByEmail(authentication.getName()).orElseThrow();
+        model.addAttribute("loggedUser", loggedUser);
         try {
             Pizza pizza = pizzaService.getById(id);
             model.addAttribute("pizza", pizza);

@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="edit = ${offer.id != null}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" th:with="edit = ${offer.id != null}">
 <head>
     <th:block th:replace="~{fragments :: resources}"></th:block>
     <meta charset="UTF-8">
