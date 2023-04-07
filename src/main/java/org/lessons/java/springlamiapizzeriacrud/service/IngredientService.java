@@ -19,15 +19,16 @@ public class IngredientService {
     }
 
     public Ingredient create(Ingredient formIngredient) {
-        Ingredient ingredientToCreate = new Ingredient();
-        ingredientToCreate.setName(formIngredient.getName());
-        return ingredientRepository.save(ingredientToCreate);
+
+        return ingredientRepository.save(formIngredient);
+    }
+
+    public Ingredient update(Ingredient formIngredient) {
+        return ingredientRepository.save(formIngredient);
     }
 
     public Ingredient getById(Integer id) {
-        Optional<Ingredient> ingredient = ingredientRepository.findById(id);
-        if (ingredient.isEmpty()) throw new RuntimeException();
-        return ingredient.get();
+        return ingredientRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public void deleteById(Integer id) {

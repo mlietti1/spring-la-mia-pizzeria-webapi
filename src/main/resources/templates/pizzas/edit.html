@@ -43,14 +43,18 @@
             </div>
         </div>
         <p>Ingredients</p>
-        <div class="mb-3 form-check row" th:each="ingredient : ${ingredientList}">
-            <div class="col col-2">
-                <input class="form-check-input" type="checkbox" th:value="${ingredient.id}"
-                       th:id="|ingredient_${ingredient.id}|" th:field="*{ingredients}">
-                <label class="form-check-label" th:for="|ingredient_${ingredient.id}|"
-                       th:text="${ingredient.name}"></label>
+        <div class="mb-3 d-flex " style="height: 180px;">
+            <div class="row p-0 m-0">
+                <div class="col col-md-4 col-lg-3 col-12 col-sm-6 form-check" th:each="ingredient : ${ingredientList}">
+                    <input class="form-check-input" type="checkbox" th:value="${ingredient.id}"
+                           th:id="|ingredient_${ingredient.id}|" th:field="*{ingredients}">
+                    <label class="form-check-label" th:for="|ingredient_${ingredient.id}|"
+                           th:text="${ingredient.name}"></label>
+                </div>
             </div>
+
         </div>
+
         <div class="mb-3">
             <label class="form-label" for="description">Description</label>
             <input class="form-control" id="description" th:errorClass="is-invalid" th:field="*{description}"

@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/pizzas/ingredients")
 public class IngredientController {
@@ -17,9 +19,14 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(@RequestParam("id") Optional<Integer> idParam, Model model) {
         model.addAttribute("list", ingredientService.getAll());
-        model.addAttribute("ingredientObj", new Ingredient());
+        if (idParam.isPresent()) {
+            model.addAttribute("ingredientObj", ingredientService.getById(idParam.get()));
+        } else {
+            model.addAttribute("ingredientObj", new Ingredient());
+        }
+
         return "ingredients/index";
     }
 
@@ -29,32 +36,19 @@ public class IngredientController {
             model.addAttribute("list", ingredientService.getAll());
             return "ingredients/index";
         }
-        ingredientService.create(ingredient);
-        return "redirect:/ingredients";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model) {
-        Ingredient ingredientToEdit = ingredientService.getById(id);
-        model.addAttribute("ingredient", ingredientToEdit);
-        model.addAttribute("ingredients", ingredientService.getAll());
-        return "ingredients/index";
-    }
-
-    @PostMapping("/edit/{id}")
-    public String doUpdate(@Valid @ModelAttribute Ingredient ingredient, BindingResult bindingResult, Model model, @PathVariable Integer id) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("ingredients", ingredientService.getAll());
-            return "ingredients/index";
+        if (ingredient.getId() != null) {
+            ingredientService.update(ingredient);
+        } else {
+            ingredientService.create(ingredient);
         }
         ingredientService.create(ingredient);
-        model.addAttribute("ingredients", ingredientService.getAll());
-        return "redirect:/ingredients";
+        return "redirect:/pizzas/ingredients";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         ingredientService.deleteById(id);
-        return "redirect:/ingredients";
+
+        return "redirect:/pizzas/ingredients";
     }
 }

@@ -17,7 +17,7 @@
     <th:block th:unless="${#strings.isEmpty(pizza.description)}">
         <p th:text="*{description}"></p>
     </th:block>
-    <h5>Ingredients:</h5>
+    <h5 th:if="*{ingredients.size() > 0}">Ingredients:</h5>
     <ul>
         <li th:each="ingredient : *{ingredients}" th:text="${ingredient.name}"></li>
     </ul>

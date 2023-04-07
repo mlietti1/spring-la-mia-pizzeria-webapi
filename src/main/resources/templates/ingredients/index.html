@@ -12,10 +12,55 @@
 <body>
 <div th:replace="~{fragments:: navbar('ingredients', '', false)}"></div>
 <div class="container py-3">
+    <th:block th:if="${list.size() == 0}">
+        <div th:replace="~{/fragments/messages :: alert('INFO', 'There are no ingredients to show!')}"></div>
+    </th:block>
+    <th:block th:if="${message}">
+        <div th:replace="~{fragments:: alert(${message.type}, ${message.text})}"></div>
+    </th:block>
     <h2 class="mb-3 pb-3 heading">Our ingredients</h2>
-    <ul>
-        <li th:each="ingredient : ${list}" th:text="${ingredient.name}"></li>
-    </ul>
+    <div class="row">
+        <div class="col col-8" style="height: 120px;">
+            <div class="row">
+                <div class="col col-12 col-md-6 col-lg-4" th:each="ingredient : ${list}">
+                    <div class="d-flex">
+                        <p th:text="${ingredient.name}"></p>
+                        <a class="text-warning" th:href="@{/pizzas/ingredients(id=${ingredient.id})}"><i
+                                class="fa-solid fa-pen-to-square ms-2"></i></a>
+                        <a class="text-secondary" th:href="@{|/pizzas/ingredients/delete/${ingredient.id}|}"><i
+                                class="fa-solid fa-trash-can ms-2"></i></a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+            <h5>Edit or add ingredients:</h5>
+            <form id="ingredient-form"
+                  method="post"
+                  th:action="@{/pizzas/ingredients/save}"
+                  th:object="${ingredientObj}">
+                <input type="hidden" th:field="*{id}">
+                <div>
+                    <label class="form-label" for="name">Name</label>
+                    <input class="mb-2 form-control" id="name" th:errorClass="is-invalid" th:field="*{name}"
+                           type="text">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-danger" th:each="err : ${#fields.errors('name')}"
+                                th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" type="submit">Submit</button>
+
+            </form>
+        </div>
+
+    </div>
+
 
 </div>
 </body>
