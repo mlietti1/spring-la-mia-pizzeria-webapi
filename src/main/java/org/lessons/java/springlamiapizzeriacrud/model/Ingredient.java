@@ -20,6 +20,10 @@ public class Ingredient {
     @NotBlank
     private String name;
 
+    @ManyToMany(mappedBy = "ingredients")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Pizza> pizzas;
+
     public Integer getId() {
         return id;
     }
@@ -34,6 +38,14 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Pizza> getPizzas() {
+        return pizzas;
+    }
+
+    public void setPizzas(List<Pizza> pizzas) {
+        this.pizzas = pizzas;
     }
 
     @Override

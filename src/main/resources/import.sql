@@ -27,5 +27,7 @@ INSERT INTO db_pizzeria.ingredients (name) VALUES ('funghi');
 INSERT INTO db_pizzeria.ingredients (name) VALUES ('prosciutto cotto');
 INSERT INTO db_pizzeria.users (email, first_name, last_name, password) VALUES('cri@email.com', 'Cristina', 'Lietti', '{noop}cri');
 INSERT INTO db_pizzeria.users (email, first_name, last_name, password) VALUES('anna@email.com', 'Anna', 'Wulfson', '{noop}anna');
+INSERT INTO db_pizzeria.roles (id, name) VALUES(1, 'ADMIN');
+INSERT INTO db_pizzeria.roles (id, name) VALUES(2, 'USER');
 INSERT into db_pizzeria.users_roles (user_id, roles_id) VALUES(1, 1);
 INSERT into db_pizzeria.users_roles (user_id, roles_id) VALUES(2, 2);

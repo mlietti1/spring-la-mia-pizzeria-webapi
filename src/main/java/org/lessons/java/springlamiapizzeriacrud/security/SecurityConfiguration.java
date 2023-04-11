@@ -31,10 +31,10 @@ public class SecurityConfiguration {
         return provider;
     }
 
-    /* @Bean
+    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .requestMatchers("/pizzas/ingredients", "/pizzas/ingredients/**").hasAuthority("ADMIN")
+                .requestMatchers("/pizzas/ingredients/**").hasAuthority("ADMIN")
                 .requestMatchers("/pizzas/offers/**").hasAuthority("ADMIN")
                 .requestMatchers("/pizzas/create", "/pizzas/edit/**", "/pizzas/delete/**")
                 .hasAuthority("ADMIN")
@@ -45,5 +45,5 @@ public class SecurityConfiguration {
                 .and().logout()
                 .and().exceptionHandling();
         return http.build();
-    }*/
+    }
 }

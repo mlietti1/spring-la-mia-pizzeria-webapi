@@ -43,9 +43,11 @@
             <td th:text="*{description}"></td>
             <td><a class="text-danger" th:href="@{|/pizzas/*{id}|}" title="detail"><i
                     class="fa-solid fa-pizza-slice"></i></a>
-                <a class="text-warning ms-2" th:href="@{|/pizzas/edit/*{id}|}" title="edit"><i
+                <a class="text-warning ms-2" th:href="@{|/pizzas/edit/*{id}|}" sec:authorize="hasAuthority('ADMIN')"
+                   title="edit"><i
                         class="fa-solid fa-pen-to-square"></i></a>
-                <a class="text-secondary ms-2" th:href="@{|/pizzas/delete/*{id}|}" title="delete"><i
+                <a class="text-secondary ms-2" th:href="@{|/pizzas/delete/*{id}|}" sec:authorize="hasAuthority('ADMIN')"
+                   title="delete"><i
                         class="fa-solid fa-trash-can"></i></a>
             </td>
         </tr>
