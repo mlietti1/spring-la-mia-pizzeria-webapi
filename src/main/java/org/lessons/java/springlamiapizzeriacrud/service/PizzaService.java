@@ -29,8 +29,9 @@ public class PizzaService {
         pizzaToPersist.setName(formPizza.getName());
         pizzaToPersist.setPrice(formPizza.getPrice());
         pizzaToPersist.setDescription(formPizza.getDescription());
-        Set<Ingredient> formIngredients = getPizzaIngredients(formPizza);
-        pizzaToPersist.setIngredients(formIngredients);
+        /*Set<Ingredient> formIngredients = getPizzaIngredients(formPizza);
+        pizzaToPersist.setIngredients(formIngredients);*/
+        pizzaToPersist.setIngredients(formPizza.getIngredients());
         pizzaToPersist.setCreatedAt(LocalDateTime.now());
         pizzaToPersist.setUpdatedAt(LocalDateTime.now());
         return pizzaRepository.save(pizzaToPersist);
@@ -41,8 +42,9 @@ public class PizzaService {
         pizzaToUpdate.setName(formPizza.getName());
         pizzaToUpdate.setPrice(formPizza.getPrice());
         pizzaToUpdate.setDescription(formPizza.getDescription());
-        Set<Ingredient> formIngredients = getPizzaIngredients(formPizza);
-        pizzaToUpdate.setIngredients(formIngredients);
+        /*Set<Ingredient> formIngredients = getPizzaIngredients(formPizza);
+        pizzaToUpdate.setIngredients(formIngredients);*/
+        pizzaToUpdate.setIngredients(formPizza.getIngredients());
         pizzaToUpdate.setUpdatedAt(LocalDateTime.now());
         return pizzaRepository.save(pizzaToUpdate);
     }
@@ -74,11 +76,11 @@ public class PizzaService {
         }
     }
 
-    private Set<Ingredient> getPizzaIngredients(Pizza formPizza) {
+    /*private Set<Ingredient> getPizzaIngredients(Pizza formPizza) {
         Set<Ingredient> formIngredients = new HashSet<>();
         for (Ingredient i : formPizza.getIngredients()) {
             formIngredients.add(ingredientRepository.findById(i.getId()).orElseThrow());
         }
         return formIngredients;
-    }
+    } */
 }

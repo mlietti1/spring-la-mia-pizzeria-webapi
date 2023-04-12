@@ -29,12 +29,10 @@ public class Pizza {
     private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    @JsonIgnore
+    
     @OneToMany(mappedBy = "pizza")
     private List<Offer> offers;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "pizza_ingredient",

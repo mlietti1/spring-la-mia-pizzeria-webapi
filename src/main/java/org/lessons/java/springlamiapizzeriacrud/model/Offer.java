@@ -1,5 +1,6 @@
 package org.lessons.java.springlamiapizzeriacrud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,7 @@ public class Offer {
 
     @ManyToOne
     @NotNull
+    @JsonIgnore
     private Pizza pizza;
 
     public Integer getId() {
