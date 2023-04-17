@@ -127,7 +127,7 @@ public class PizzaController {
             }
         } catch (PizzaNotFoundException e) {
             //throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-            redirectAttributes.addAttribute("message", new AlertMessage(AlertMessageType.ERROR, "Pizza with id " + id + " not found."));
+            redirectAttributes.addFlashAttribute("message", new AlertMessage(AlertMessageType.ERROR, "Pizza with id " + id + " not found."));
         }
         return "redirect:/pizzas";
     }
